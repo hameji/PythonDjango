@@ -1,0 +1,39 @@
+# githubリポジトリをクローン
+git clone git@github.com: [User]/[Repository].git
+
+# ブランチを見る
+git branch
+
+# ブランチを作成する
+git branch *****
+
+# ブランチを切り替える
+git checkout *****
+
+# gitにコミットする
+git add *****.***
+
+# 直前のコミットを取り消す
+git reset
+
+# 特定のファイルのaddを取り消す
+git reset ********
+
+# コミットしていない内容を確認する
+git status
+
+# ローカルにコミットする(全部)
+# viが立ち上がるので、「i」でインサートモードにし、記入後「esc」+「:wq」
+git commit -a
+
+# 直接ローカルにコミットする
+git commit -m "*****"
+
+# 直前のコミットを修正する
+git commit --amend
+
+# ローカルの内容をリモートにpush
+git push *****(to) *****(branch)
+
+# リモートの変更をローカルに取り込むぎｔ
+git pull
