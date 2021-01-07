@@ -3,7 +3,7 @@
 https://gyoumu-kouritsuka-pro.site/python-django-basic/ <BR>
 
 # 進捗状況 - 課題
-課題2: 1/8 完了・提出
+課題2: 1/8 完了・提出<BR>
 課題1: 12/19 完了・提出<BR>
 課題0: 12/17 完了, 12/18 提出, 12/19 OKいただいた<BR>
 
