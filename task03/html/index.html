@@ -1,26 +1,42 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <title>eelテスト</title>
-        <link rel="stylesheet" href="./style.css">
-    </head>
-    <body>
-        <h2>eelテスト</h2>
-        <script type="text/javascript" src="./eel.js"></script>
-        <script>
-            search.addEventListener('click', () => {
+  <head>
+    <meta charset="utf-8"/>
+    <title>eelテスト</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <h2>eelテスト</h2>
+    <script type="text/javascript" src"./eel.js"></script>
+    <script>
+      search.addEventListener("click", () => {
 
-            })
+      })
 
-            eel.expose(view_log_js)
-            function view_log_js(text){
-            }
-        </script>
-        <!--課題1-->
-        <FORM>
-            検索ワード: <INPUT type="text" name="input" size="20" ><BR>
-            <P>
-                <INPUT type="submit" value="送信"><INPUT type="reset" value="リセット">
-            </P>
-        </FORM>
-    </body>
+      eel.expose(view_log_js)
+      function view_log_js(text){
+
+      }
+    </script>
+    <!--入力FORM-->
+    <form id="form1" action="#">
+      <input type="text" id="input_message" value="">
+      <input type="button" onclick="func1()" value="送信">
+    </form>
+    <div id="output_message"></div>
+
+    <!--javascriptコード-->
+    <script language="javascript" type="text/javascript">
+      function func1() {
+        var input_message = document.getElementById("input_message").value;
+        console.log(input_message);
+        if (input_message == "") {
+          alert("入力が空です！");
+        } else {
+          input_message = "入力された内容は「" + input_message + "」です。";
+          document.getElementById("output_message").innerHTML = input_message;
+        }
+      }
+    </script>
+  </body>
 </html>
