@@ -64,8 +64,8 @@ def main():
         content_list = info.find_element_by_class_name("cassetteRecruit__main")
         tr_list = content_list.find_elements_by_tag_name("tr")
         for tr in tr_list:
-            item = tr.find_element_by_tag_name("th").get_attribute("innerHTML")
-            value = tr.find_element_by_tag_name("td").get_attribute("innerHTML")
+            item = tr.find_element_by_tag_name("th").test
+            value = tr.find_element_by_tag_name("td").text
             print("item:", item, "value:", value)
 
 

@@ -62,15 +62,15 @@ def main():
     colum_name = []
     for info in job_info:
         job_datum = []
-        name = info.find_element_by_class_name("cassetteRecruit__name").get_attribute("innerHTML")
+        name = info.find_element_by_class_name("cassetteRecruit__name").text
         content_list = info.find_element_by_class_name("cassetteRecruit__main")
         tr_list = content_list.find_elements_by_tag_name("tr")
         job_datum.append(name)
 
         colum_name.clear
         for tr in tr_list:
-            item = tr.find_element_by_tag_name("th").get_attribute("innerHTML")
-            value = tr.find_element_by_tag_name("td").get_attribute("innerHTML")
+            item = tr.find_element_by_tag_name("th").text
+            value = tr.find_element_by_tag_name("td").text
             print("item:", item, "value:", value)
             job_datum.append(value)
 

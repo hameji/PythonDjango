@@ -67,7 +67,7 @@ def main():
         element = ""
         try:
             element = "会社名"
-            name = info.find_element_by_class_name("cassetteRecruit__name").get_attribute("innerHTML")
+            name = info.find_element_by_class_name("cassetteRecruit__name").text
             content_list = info.find_element_by_class_name("cassetteRecruit__main")
             element = "仕事条件"
             tr_list = content_list.find_elements_by_tag_name("tr")
@@ -76,9 +76,9 @@ def main():
             colum_name.clear
             for tr in tr_list:
                 element = "項目名"
-                item = tr.find_element_by_tag_name("th").get_attribute("innerHTML")
+                item = tr.find_element_by_tag_name("th").text
                 element = "内容"
-                value = tr.find_element_by_tag_name("td").get_attribute("innerHTML")
+                value = tr.find_element_by_tag_name("td").text
                 print("item:", item, "value:", value)
                 job_datum.append(value)
                 colum_name.append(item) ## <-何度も回って少し無駄な気しますが、わざわざそれだけ取り出すコード書くのも面倒なので、、、
