@@ -49,8 +49,7 @@ def main():
         pass
     
     # 検索窓に入力
-    driver.find_element_by_class_name(
-        "topSearch__text").send_keys(search_keyword)
+    driver.find_element_by_class_name("topSearch__text").send_keys(search_keyword)
     # 検索ボタンクリック
     driver.find_element_by_class_name("topSearch__button").click()
 

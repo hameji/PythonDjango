@@ -83,18 +83,14 @@ def main():
     colum_name = []
     for info in job_info:
         job_datum = []
-        element = ""
         try:
-            element = "会社名"
             name = info.find_element_by_class_name("cassetteRecruit__name").text
             content_list = info.find_element_by_class_name("cassetteRecruit__main")
-            element = "仕事条件"
             tr_list = content_list.find_elements_by_tag_name("tr")
             job_datum.append(name)
 
             colum_name.clear
             for tr in tr_list:
-                element = "項目名"
                 item = tr.find_element_by_tag_name("th").text
                 value = tr.find_element_by_tag_name("td").text
                 print("item:", item, "value:", value)
@@ -104,7 +100,7 @@ def main():
             job_data.append(job_datum)
             colum_name.insert(0, "会社名")
         except exception as e:
-            take_log("error while getting " + element)
+            take_log("error while getting " + e)
             pass
         else:
             take_log(f"succeeded scraping {name}")
