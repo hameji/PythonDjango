@@ -4,7 +4,7 @@ import time
 import pandas as pd
 
 # Chromeを起動する関数
-def __set_driver(driver_path, headless_flg):
+def set_driver(driver_path, headless_flg):
     # Chromeドライバーの読み込み
     options = ChromeOptions()
 
@@ -23,7 +23,7 @@ def __set_driver(driver_path, headless_flg):
     # ChromeのWebDriverオブジェクトを作成する。
     return Chrome(executable_path=os.getcwd() + "/" + driver_path, options=options)
 
-def __getName(driver):
+def getName(driver):
     # ページ終了まで繰り返し取得
     exp_name_list = []
     # 検索結果の一番上の会社名を取得
@@ -35,7 +35,7 @@ def __getName(driver):
         exp_name_list.append(name.text)
         print(name.text)
 
-def __checkNextPage(driver):
+def checkNextPage(driver):
     next_link = driver.find_elements_by_class_name("pager__next")
     if len(next_link) > 0:
         print("going to load next page")
@@ -49,9 +49,9 @@ def main():
     search_keyword = "高収入"
     # driverを起動
     if os.name == 'nt': #Windows
-        driver = __set_driver("chromedriver.exe", False)
+        driver = set_driver("chromedriver.exe", False)
     elif os.name == 'posix': #Mac
-        driver = __set_driver("chromedriver", False)
+        driver = set_driver("chromedriver", False)
     # Webサイトを開く
     driver.get("https://tenshoku.mynavi.jp/")
     time.sleep(5)
@@ -73,11 +73,11 @@ def main():
 
     ## 課題3
     ## まず会社名を表示
-    __getName(driver)
+    getName(driver)
 
     ## 次のページへのリンクが有る場合はクリックし、会社名を表示し続ける
-    while __checkNextPage(driver) == True:
-        __getName(driver)
+    while checkNextPage(driver) == True:
+        getName(driver)
 
 
 # 直接起動された場合はmain()を起動(モジュールとして呼び出された場合は起動しないようにするため)

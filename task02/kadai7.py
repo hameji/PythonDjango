@@ -31,20 +31,20 @@ def set_driver(driver_path, headless_flg):
     return Chrome(executable_path=os.getcwd() + "/" + driver_path, options=options)
 
 
-def __get_time():
+def get_time():
     now = dt.datetime.now().strftime("%Y%m%d")
     return now
 
-def __take_log(event):
-    now = __get_time()
+def take_log(event):
+    now = get_time()
     log = f"{now}, {event} {new_line_code}"
     with open("log.txt", mode="a", encoding="utf-8_sig") as f:
         f.writelines(log)
 
 
-# main処理
+# main
 def main():
-    __take_log("起動した")
+    take_log("起動した")
     search_keyword = "高収入"
     # driverを起動
     if os.name == 'nt': #Windows
@@ -54,7 +54,7 @@ def main():
     # Webサイトを開く
     
     driver.get("https://tenshoku.mynavi.jp/")
-    __take_log("ページの読み込み成功")
+    take_log("ページの読み込み成功")
     time.sleep(5)
  
     try:
@@ -71,13 +71,13 @@ def main():
     driver.find_element_by_class_name("topSearch__text").send_keys(search_keyword)
     # 検索ボタンクリック
     driver.find_element_by_class_name("topSearch__button").click()
-    __take_log("キーワード送信成功")
+    take_log("キーワード送信成功")
 
 
     ## 課題5に tryを追加, 
     ## 変数を用い、どの要素が問題かわかるようにしてみた。
 
-    __take_log("スクレイピング開始")
+    take_log("スクレイピング開始")
     job_info = driver.find_elements_by_class_name("cassetteRecruit")
     job_data = []
     colum_name = []
@@ -104,10 +104,10 @@ def main():
             job_data.append(job_datum)
             colum_name.insert(0, "会社名")
         except exception as e:
-            __take_log("error while getting " + element)
+            take_log("error while getting " + element)
             pass
         else:
-            __take_log(f"succeeded scraping {name}")
+            take_log(f"succeeded scraping {name}")
             pass
         finally:
             print(job_data)
