@@ -7,8 +7,8 @@ end_point="index.html"
 size=(700,600)
 
 @ eel.expose
-def kimetsu_search(word):
-    result = search.kimetsu_search(word)
+def kimetsu_search(path, word):
+    result = search.kimetsu_search(path, word)
     if result:
         eel.display_result(f"『{word}』は保存されいてます。")    
     else:
@@ -16,8 +16,8 @@ def kimetsu_search(word):
         eel.ask_if_append(word)
 
 @ eel.expose
-def add_to_kimetsu(word):
-    search.add_to_kimetsu(word)
+def add_to_kimetsu(path, word):
+    search.add_to_kimetsu(path, word)
     eel.display_result(f"『{word}』をファイルに保存しました。")
 
 

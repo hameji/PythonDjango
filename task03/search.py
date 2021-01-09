@@ -1,9 +1,9 @@
 import pandas as pd
 
 ### デスクトップアプリ作成課題
-def kimetsu_search(word):
+def kimetsu_search(path, word):
     # 検索対象取得
-    df=pd.read_csv("./source.csv")
+    df=pd.read_csv(path)
     source=list(df["name"])
     # 検索
     if word in source:
@@ -11,7 +11,7 @@ def kimetsu_search(word):
     else:
         return False
 
-def add_to_kimetsu(word):
+def add_to_kimetsu(path, word):
     # 検索対象取得
     df=pd.read_csv("./source.csv")
     source=list(df["name"])
@@ -19,5 +19,5 @@ def add_to_kimetsu(word):
     
     # CSV書き込み
     df=pd.DataFrame(source,columns=["name"])
-    df.to_csv("./source.csv",encoding="utf_8-sig")
+    df.to_csv(path,encoding="utf_8-sig")
     print(source)

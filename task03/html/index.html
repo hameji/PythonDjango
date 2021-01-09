@@ -10,25 +10,41 @@
 
     <!--入力FORM-->
     <form id="form1" action="#">
-      <input type="text" id="input_message">
-      <input type="button" id="search" value="送信">
+      <p>
+        ファイルの保存場所: <input type="text" id="save_directory" value="./source.csv">
+        <input type="button" id="directory" value="設定する">
+      </p>
+      <p>
+        名前: <input type="text" id="input_message">
+        <input type="button" id="search" value="送信">
+      </p>
     </form>
-    <div id="output_message">
-      <textarea id="resultTextarea" class="log_textArea" readonly></textarea>
-    </div>
+
+    <textarea id="resultTextarea" class="log_textArea" readonly></textarea>
+
     <script type="text/javascript" src="/eel.js"></script>
     <script type="text/javascript">
+
+      var selectfolder = document.getElementById("directory");
+      selectfolder.addEventListener("click", () => {
+        var input_directory = document.getElementById("save_directory").value; 
+        if (input_directory == "") {
+          alert("保存場所のパスが正しくないです。");
+        } else {
+          console.log("問題なし");
+        }
+      });
+
       var search = document.getElementById("search");
       // ↓アロー関数という、(他に無名関数, 外部関数の書き方あり)
       search.addEventListener("click", () => {
-  
         var input_message = document.getElementById("input_message").value; 
         console.log("これはどう？");
         if (input_message == "") {
           alert("入力が空です！");
         } else {
-          eel.kimetsu_search(input_message)();
-
+          var path = document.getElementById("save_directory").value
+          eel.kimetsu_search(path, input_message)();
         }
       });
 
@@ -36,7 +52,8 @@
       function ask_if_append(text) {
         var result_append = window.confirm(text + "をファイルに登録しますか？");
         if (result_append) {
-            eel.add_to_kimetsu(text);
+            var path = document.getElementById("save_directory").value
+            eel.add_to_kimetsu(path, text);
         }
       }
 
