@@ -14,7 +14,7 @@
       <input type="button" id="search" value="送信">
     </form>
     <div id="output_message">
-      <textarea name="resultTextarea"></textarea>
+      <textarea id="resultTextarea" readonly></textarea>
     </div>
     <script type="text/javascript" src="/eel.js"></script>
     <script type="text/javascript">
@@ -32,9 +32,18 @@
         }
       });
 
-      eel.expose(view_log_js);
-      function view_log_js(text) {
+      eel.expose(ask_if_append);
+      function ask_if_append(text) {
+        var result_append = window.confirm(text + "をファイルに登録しますか？");
+        if (result_append) {
+            eel.add_to_kimetsu(text);
+        }
+      }
 
+      eel.expose(display_result);
+      function display_result(text) {
+        var result = document.getElementById("resultTextarea").value;
+        document.getElementById("resultTextarea").value += "\n" + text;
       }
 
     </script>
