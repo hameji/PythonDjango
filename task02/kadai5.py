@@ -80,6 +80,8 @@ def main():
     print(job_data)
 
     df = pd.DataFrame(job_data)
+    if len(df.columns) == len(colum_name):
+        df.columns = colum_name
     print(df)
 
     df.to_csv("data.csv")
