@@ -10,25 +10,30 @@ class Item:
     def get_price(self):
         return self.price
 
+class Request:
+    def __init__(self, item_code, item_amount):
+        self.item_code = item_code
+        self.item_amount = item_amount
+
 ### オーダークラス
 class Order:
     def __init__(self,item_master):
         self.item_order_list=[]
         self.item_master=item_master
     
-    def add_item_order(self,item_code):
-        self.item_order_list.append(item_code)
+    def add_item_order(self,request):
+        self.item_order_list.append(request)
         
     def view_item_list(self):
-        for item in self.item_order_list:
-            print(f"商品コード: { item }")
+        for request in self.item_order_list:
+            print(f"商品コード: { request.item_code }, 数量: { request.item_amount }")
 
     def get_order_list(self):
-        for item_code in self.item_order_list:
-            for order in self.item_master:
-                if order.item_code == item_code:
-                    print(f"商品名: {order.item_name}, {order.price}")
-
+        for request in self.item_order_list:
+            item_code = request.item_code
+            for item in self.item_master:
+                if item.item_code == item_code:
+                    print(f"商品コード: {item.item_code}, 商品名: {item.item_name}, 金額: {item.price}, 数量: {request.item_amount}")
         
 ### メイン処理
 def main():
@@ -38,28 +43,29 @@ def main():
     item_master.append(Item("002","なし",120))
     item_master.append(Item("003","みかん",150))
 
-    # ファイルから商品登録
-    item_list = []
-    with open("./source.csv") as f:
-        for code, item, price in csv.reader(f):
-            print(f"【追加】コード: {code}, 商品: {item}, 値段:{price}")
-            item_master.append(Item(code, item, price))
+    # # ファイルから商品登録
+    # item_list = []
+    # with open("./source.csv") as f:
+    #     for code, item, price in csv.reader(f):
+    #         print(f"【追加】コード: {code}, 商品: {item}, 値段:{price}")
+    #         item_master.append(Item(code, item, price))
 
     # オーダーを登録
     order=Order(item_master)
-    order.add_item_order("001")
-    order.add_item_order("002")
-    order.add_item_order("003")
+    order.add_item_order(Request("001", 5))
+    order.add_item_order(Request("002",3))
+    order.add_item_order(Request("003",1))
 
     # オーダー追加プロンプト
     order_no = input("オーダー商品番号を入力ください")
+    order_amount = input("オーダー個数を入力してください")
     item_list = []
     for order_item in order.item_master:
         item_list.append(order_item.item_code)
     # 該当コードの商品があるか判別、ある場合にオーダーに追加
     if order_no in item_list:
         print(order_no, "は存在するよ")
-        order.add_item_order(order_no)
+        order.add_item_order(Request(order_no, 10))
     else:
         print("その商品コードで登録されているアイテムはありません。")
 
