@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Eel</title>
+        
+    </head>
+    <body>
+        <div id="target"></div>
+        <script type="text/javascript" src="/eel.js"></script>
+        <script type="text/javascript">
+            eel.python_function("aa")
+
+            async function run() {
+                let val = await eel.python_function2()();
+                console.log(val + " from Python");
+            }
+
+            run();
+
+            <!--
+            eel.expose(js_function);
+            function js_function(values) {
+                var s = "";
+                for (var i = 0; i < values.length; i++) {
+                    s += values[i] + "<br>";
+                }
+                document.getElementById("target").innerHTML = s;
+            }
+            //-->
+        </script>
+    </body>
+</html>
