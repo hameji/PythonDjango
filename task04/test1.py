@@ -42,6 +42,21 @@ def main():
     order.add_item_order("002")
     order.add_item_order("003")
 
+    # オーダー追加プロンプト
+    order_no = input("オーダー商品番号を入力ください")
+    if order_no == "001" or \
+       order_no == "002" or \
+       order_no == "003":
+        order.add_item_order(order_no)
+    elif order_no == "1":
+        order.add_item_order("001")
+    elif order_no == "2":
+        order.add_item_order("002")
+    elif order_no == "3":
+        order.add_item_order("003")
+    else:
+        print("その商品コードで登録されているアイテムはありません。")
+
     # オーダー表示
     print("【オーダーコード】")
     order.view_item_list()
