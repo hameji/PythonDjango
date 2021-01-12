@@ -28,7 +28,7 @@ class Order:
         for request in self.item_order_list:
             print(f"商品コード: { request.item_code }, 数量: { request.item_amount }")
 
-    def get_order_list(self):
+    def get_order_list(self, money):
         total_price = 0
         for request in self.item_order_list:
             item_code = request.item_code
@@ -36,7 +36,14 @@ class Order:
                 if item.item_code == item_code:
                     print(f"商品コード: {item.item_code}, 商品名: {item.item_name}, 金額: {item.price}, 数量: {request.item_amount}")
                     total_price += item.price * int(request.item_amount)
-        print(f"合計金額は {total_price} 円 です。")
+        print(f"合計金額は {total_price} 円 です。")    
+        print(f"お預り金は{money} 円です。")
+        if total_price < money:
+            change = money - total_price
+            print(f"お預り金は{money}なので、お釣りは{change}円となります。")
+        else:
+            shortage = total_price - money
+            print(f"{shortage} 円不足しています。")
         
 ### メイン処理
 def main():
@@ -46,6 +53,7 @@ def main():
     item_master.append(Item("002","なし",120))
     item_master.append(Item("003","みかん",150))
 
+    ## 課題3
     # # ファイルから商品登録
     # item_list = []
     # with open("./source.csv") as f:
@@ -59,18 +67,27 @@ def main():
     order.add_item_order(Request("002",3))
     order.add_item_order(Request("003",1))
 
-    # オーダー追加プロンプト
-    order_no = input("オーダー商品番号を入力ください")
-    order_amount = input("オーダー個数を入力してください")
-    item_list = []
-    for order_item in order.item_master:
-        item_list.append(order_item.item_code)
-    # 該当コードの商品があるか判別、ある場合にオーダーに追加
-    if order_no in item_list:
-        print(order_no, "は存在するよ")
-        order.add_item_order(Request(order_no, order_amount))
+    ## 課題6
+    input_money = input("お預かり金額を入力してください")
+    if input_money.isdecimal():
+        print("正しい値が入力されました")
     else:
-        print("その商品コードで登録されているアイテムはありません。")
+        print("入力値が正しくありません。")
+        return
+
+    ## 課題2, 課題4
+    # # オーダー追加プロンプト
+    # order_no = input("オーダー商品番号を入力ください")
+    # order_amount = input("オーダー個数を入力してください")
+    # item_list = []
+    # for order_item in order.item_master:
+    #     item_list.append(order_item.item_code)
+    # # 該当コードの商品があるか判別、ある場合にオーダーに追加
+    # if order_no in item_list:
+    #     print(order_no, "は存在するよ")
+    #     order.add_item_order(Request(order_no, order_amount))
+    # else:
+    #     print("その商品コードで登録されているアイテムはありません。")
 
     # 全商品の表示
     print("【全リスト】")
@@ -83,7 +100,7 @@ def main():
     order.view_item_list()
     # オーダー内容表示
     print("【オーダー商品】")
-    order.get_order_list()
+    order.get_order_list(int(input_money))
     
 if __name__ == "__main__":
     main()
