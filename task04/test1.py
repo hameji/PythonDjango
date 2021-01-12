@@ -1,10 +1,7 @@
 import os, csv
 import datetime as dt
 
-if os.name == "nt": #Windows
-    new_line_code = "\r\n"
-elif os.name == "posix": #Mac
-    new_line_code = "\n"
+new_line_code = "\r\n" if os.name == "nt" else "\n"
 
 ### 商品クラス
 class Item:
