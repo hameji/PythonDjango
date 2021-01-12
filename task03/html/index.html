@@ -25,9 +25,9 @@
     <script type="text/javascript" src="/eel.js"></script>
     <script type="text/javascript">
 
-      var selectfolder = document.getElementById("directory");
-      selectfolder.addEventListener("click", () => {
-        var input_directory = document.getElementById("save_directory").value; 
+      directory.addEventListener("click", () => {
+//        var input_directory = document.getElementById("save_directory").value; // 以下と同じ
+        var input_directory = save_directory.value; 
         if (input_directory == "") {
           alert("保存場所のパスが正しくないです。");
         } else {
@@ -35,16 +35,16 @@
         }
       });
 
-      var search = document.getElementById("search");
       // ↓アロー関数という、(他に無名関数, 外部関数の書き方あり)
       search.addEventListener("click", () => {
-        var input_message = document.getElementById("input_message").value; 
+//        var input_message = document.getElementById("input_message").value; //以下と同じ
+        var input_messageA = input_message.value;
         console.log("これはどう？");
-        if (input_message == "") {
+        if (input_messageA == "") {
           alert("入力が空です！");
         } else {
-          var path = document.getElementById("save_directory").value
-          eel.kimetsu_search(path, input_message)();
+          var path = save_directory.value;
+          eel.kimetsu_search(path, input_messageA)();
         }
       });
 
@@ -52,15 +52,15 @@
       function ask_if_append(text) {
         var result_append = window.confirm(text + "をファイルに登録しますか？");
         if (result_append) {
-            var path = document.getElementById("save_directory").value
+            var path = save_directory.value;
             eel.add_to_kimetsu(path, text);
         }
       }
 
       eel.expose(display_result);
       function display_result(text) {
-        var result = document.getElementById("resultTextarea").value;
-        document.getElementById("resultTextarea").value += "\n" + text;
+        var result = resultTextarea.value;
+        resultTextarea.value += "\n" + text;
       }
 
     </script>
