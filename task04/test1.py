@@ -29,11 +29,14 @@ class Order:
             print(f"商品コード: { request.item_code }, 数量: { request.item_amount }")
 
     def get_order_list(self):
+        total_price = 0
         for request in self.item_order_list:
             item_code = request.item_code
             for item in self.item_master:
                 if item.item_code == item_code:
                     print(f"商品コード: {item.item_code}, 商品名: {item.item_name}, 金額: {item.price}, 数量: {request.item_amount}")
+                    total_price += item.price * int(request.item_amount)
+        print(f"合計金額は {total_price} 円 です。")
         
 ### メイン処理
 def main():
