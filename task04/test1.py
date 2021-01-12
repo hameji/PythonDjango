@@ -65,7 +65,7 @@ def main():
     # 該当コードの商品があるか判別、ある場合にオーダーに追加
     if order_no in item_list:
         print(order_no, "は存在するよ")
-        order.add_item_order(Request(order_no, 10))
+        order.add_item_order(Request(order_no, order_amount))
     else:
         print("その商品コードで登録されているアイテムはありません。")
 
