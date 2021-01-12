@@ -1,4 +1,10 @@
-import csv
+import os, csv
+import datetime as dt
+
+if os.name == "nt": #Windows
+    new_line_code = "\r\n"
+elif os.name == "posix": #Mac
+    new_line_code = "\n"
 
 ### 商品クラス
 class Item:
@@ -30,21 +36,40 @@ class Order:
 
     def get_order_list(self, money):
         total_price = 0
+        data = ""
         for request in self.item_order_list:
             item_code = request.item_code
             for item in self.item_master:
                 if item.item_code == item_code:
+                    data += f"商品コード: {item.item_code}, 商品名: {item.item_name}, 金額: {item.price}, 数量: {request.item_amount}{new_line_code}" 
                     print(f"商品コード: {item.item_code}, 商品名: {item.item_name}, 金額: {item.price}, 数量: {request.item_amount}")
                     total_price += item.price * int(request.item_amount)
+        data += f"合計金額は {total_price} 円 です。{new_line_code}"
         print(f"合計金額は {total_price} 円 です。")    
+        data += f"お預り金は{money} 円です。{new_line_code}"
         print(f"お預り金は{money} 円です。")
         if total_price < money:
             change = money - total_price
-            print(f"お預り金は{money}なので、お釣りは{change}円となります。")
+            data += f"お釣りは{change}円となります。{new_line_code}"
+            print(f"お釣りは{change}円となります。")
         else:
             shortage = total_price - money
+            data += f"{shortage} 円不足しています。{new_line_code}"
             print(f"{shortage} 円不足しています。")
-        
+        return data
+
+### 保存クラス
+class ReceiptManager():
+
+    def make_data_path():
+        today_time = dt.datetime.now().strftime('%Y%m%d_%H%M%S') ## %H:%M:%S
+        path = "receipt" + today_time + ".txt" 
+        return path
+
+    def write_to_file(path, data):
+        with open(path, mode='w', encoding="utf-8_sig") as file:
+            file.write(data)
+
 ### メイン処理
 def main():
     # マスタ登録
@@ -100,7 +125,11 @@ def main():
     order.view_item_list()
     # オーダー内容表示
     print("【オーダー商品】")
-    order.get_order_list(int(input_money))
-    
+    data = order.get_order_list(int(input_money))
+
+    # 課題7
+    path = ReceiptManager.make_data_path()
+    ReceiptManager.write_to_file(path, data)
+
 if __name__ == "__main__":
     main()
