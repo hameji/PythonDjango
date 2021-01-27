@@ -1,0 +1,109 @@
+/* **** ヘッダー **** */
+.datetime {
+    text-align: center;
+    font-size: 12px;
+    color: #ffffff;
+}
+
+.page_title {
+    text-align: center;
+    font-size: 24px;
+    color: #ffffff;
+}
+
+/* **** ページ管理関連 **** */
+.page {
+    width: 500px;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.page_navigation {
+    width: 500px;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* **** テーブル **** */
+/* 全体設定 */
+table {
+    border: none;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+tr {
+    border-bottom: solid 1px silver;
+}
+
+th, td {
+    border: none;
+    align-content: center;
+}
+
+/* 注文ログ表示テーブル */
+.order_log {
+    background-color: #4682b4;
+}
+
+.divide_line {
+    width: 200px;
+    height: 3px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #d3d3d3;
+}
+
+/* 金額計算表 */
+.total_price {
+    width: 280px;
+    background-color: #ffffff;
+}
+
+/* 預り金 */
+.current_money {
+    background-color: #ffffff;
+    width: 280px;
+}
+
+.pay_pattern_cell {
+    border-left: solid 10px blue;
+}
+
+.pay_amount {
+    text-align: right;
+}
+
+/* **** ボタン **** */
+.pay_pattern_key {
+    background-color: pink;
+    width: 80px;
+    height: 50px;    
+}
+
+.eatin_key, .takehome_key {
+    width: 80px;
+    height: 50px;
+}
+
+.ok_key {
+    width: 80px;
+    height: 50px;
+    background-color: orange;
+}
+
+.clear_key {
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #b0c4de;
+    width: 150px;
+    height: 50px;
+}
+
+.number_key {
+    background-color: #ffffff;
+    width: 50px;
+    height: 50px;
+}

@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>本体</title>
+        <link rel="stylesheet" href="./style.css">
+    </head>
+    <body bgcolor="#000000" text="ffffff">
+        <div id="datetime_text" class="datetime">time</div>
+        <div id="page_title_text" class="page_title">お会計</div>
+
+        <script type="text/javascript">
+            // 日付日時
+            function getDateStr(date, format) {
+                if (!format) {
+                    format = 'YYYY月MM月DD日 hh:mm:ss';
+                }
+                format = format.replace(/YYYY/g, date.getFullYear());
+                format = format.replace(/MM/g, ('0' + (date.getMonth() + 1)).slice(-2));
+                format = format.replace(/DD/g, ('0' + date.getDate()).slice(-2));
+                format = format.replace(/hh/g, ('0' + date.getHours()).slice(-2));
+                format = format.replace(/mm/g, ('0' + date.getMinutes()).slice(-2));
+                format = format.replace(/ss/g, ('0' + date.getSeconds()).slice(-2));
+                return format;
+            }
+            function displayTime() {
+                datetime_text.innerHTML = getDateStr(new Date(), 'YYYY年MM月DD日 hh:mm:ss');
+            }
+
+            setInterval('displayTime()', 1000);
+        </script>
+    </body>
+</html>

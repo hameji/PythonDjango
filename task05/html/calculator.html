@@ -1,0 +1,125 @@
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>電卓</title>
+        <link rel="stylesheet" href="./style.css">
+    </head>
+    <body bgcolor="#d3d3d3">
+         <!--商品コード入力-->
+        <form id="form1" action="#">
+        商品コード: <input id="item_code" type="text" size="10"> <input id="fetch_item" type="submit" value="決定">
+        <p>
+
+         <!--お金の計算-->
+        <div>
+            <table class="total_price" bgcolor="#ffffff">
+                <tr>
+                    <td class=""><B>合計金額</B></td>
+                    <td width="200" align="right">¥ -</td>
+                <tr>
+                <tr>
+                    <td></td>
+                    <td align="right">(内 消費税 等 ¥ -)</td>
+                <tr>
+                <tr>
+                    <td colspan="2"><div class="divide_line"></div></td>
+                <tr>
+                <tr>
+                    <td align="right">お預かり</td>
+                    <td align="right" id="deposit">¥ -</td>
+                <tr>
+                <tr>
+                    <td align="right">お釣り</td>
+                    <td align="right">¥ -</td>
+                <tr>
+            </table>
+        </div>
+        <p>
+
+        <!--現在のお金の入力値-->
+        <div>
+            <table class="current_money">
+                <tr>
+                    <td class="pay_pattern_cell"><B>現金</B></td>
+                    <td id="pay_amount">¥ -</td>
+                </tr>
+            </table>
+        </div>
+        <p>
+
+        <!--キーボードのテンキー-->
+        <div bgcolor="#d3d3d3">
+            <table>
+                <tr>
+                    <td colspan="3" bgcolor="#ffffff"><input type="button" value="C" class="clear_key" onclick="clear()"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td width="30" bgcolor="#ffffff"><input type="button" value="7" class="number_key" onclick="add(this)"></td>
+                    <td width="30" bgcolor="#ffffff"><input type="button" value="8" class="number_key" onclick="add(this)"></td>
+                    <td width="30" bgcolor="#ffffff"><input type="button" value="9" class="number_key" onclick="add(this)"></td>
+                    <td width="40" bgcolor="#ffffff"><input type="button" value="支払い方法" class="pay_pattern_key"></td>
+                </tr>
+                <tr>
+                    <td width="30" bgcolor="#ffffff"><input type="button" value="4" class="number_key" onclick="add(this)"></td>
+                    <td width="30" bgcolor="#ffffff"><input type="button" value="5" class="number_key" onclick="add(this)"></td>
+                    <td width="30" bgcolor="#ffffff"><input type="button" value="6" class="number_key" onclick="add(this)"></td>
+                    <td width="40" bgcolor="#ffffff"><input type="button" value="店内飲食" class="eatin_key"></td>
+                </tr>
+                <tr>
+                    <td width="30" bgcolor="#ffffff"><input type="button" value="1" class="number_key" onclick="add(this)"></td>
+                    <td width="30" bgcolor="#ffffff"><input type="button" value="2" class="number_key" onclick="add(this)"></td>
+                    <td width="30" bgcolor="#ffffff"><input type="button" value="3" class="number_key" onclick="add(this)"></td>
+                    <td width="40" bgcolor="#ffffff"><input type="button" value="持ち帰り" class="takehome_key"></td>
+                </tr>
+                <tr>
+                    <td width="30" bgcolor="#ffffff"><input type="button" value="0" class="number_key" style="width:50px;height:50px;" onclick="add(this)"></td>
+                    <td width="30" bgcolor="#ffffff"><input type="button" value="00" class="number_key" onclick="add(this)"></td>
+                    <td width="30" bgcolor="#ffffff"><input type="button" value="000" class="number_key" onclick="add(this)"></td>
+                    <td width="40" bgcolor="#ffffff"><input type="button" value="OK" class="ok_key" onclick="calc()"></td>
+                </tr>
+            </table>
+        </div>
+        </form>
+        <script type="text/javascript" src="/eel.js"></script>
+        <script type="text/javascript">
+            async function load() {
+                order = await eel.make_items()
+                return order
+            }
+
+            order = load()
+
+            // 注文コードで商品オーダー
+            fetch_item.addEventListener('click', () => {
+                if (item_code.value == "") {
+                    alert("入力が空です。");
+                } else {
+                    eel.fetch_item(item_code.value);
+                }
+            });
+
+            // テンキー操作
+            function clear() {
+                pay_amount.innerHTML = "¥ -";
+            }
+
+            function add(elem) {
+                if (pay_amount.innerHTML == "¥ -") {
+                    pay_amount.innerHTML = "¥ ";
+                }
+                pay_amount.innerHTML = pay_amount.innerHTML + elem.value; 
+            }
+
+            // OK function
+            function calc() {
+                // 金額を渡す
+                let price = pay_amount.innerHTML.replace(/[^0-9]/g, '');
+                deposit.innerHTML = "¥ " + price;
+                // 引き算する
+                change = price - a;
+            }
+
+        </script>
+    </body>
+</html>
