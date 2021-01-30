@@ -3,7 +3,7 @@ import requests
 import pprint
 import csv
 
-def requestUrl(url):
+def request_Url(url):
     payload = {
         'applicationId': 1094782773139302380,
         'genreId': 100283, # 洋菓子
@@ -13,7 +13,7 @@ def requestUrl(url):
     r = requests.get(url, params=payload)
     return r.json()
 
-def checkData(json):
+def check_Data(json):
     print("_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/")
     print("_/_/_/_/_/_/_/_/_/構造確認_/_/_/_/_/_/_/_/_/")
     print("_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/")
@@ -32,7 +32,7 @@ def checkData(json):
 
     print("_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/")
 
-def parseJsontoList(json):
+def parse_Json_to_List(json):
     ranking_list = []
 
     counter = 0
@@ -57,11 +57,11 @@ def add_to_csv_file(path, list):
 
 def main():
     url = 'https://app.rakuten.co.jp/services/api/IchibaItem/Ranking/20170628'
-    json = requestUrl(url)
+    json = request_Url(url)
 
     # checkData(json)
 
-    list = parseJsontoList(json)
+    list = parse_Json_to_List(json)
     add_to_csv_file('kadai3data.csv', list)
     
 

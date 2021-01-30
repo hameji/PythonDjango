@@ -19,7 +19,7 @@ def get_api(keyword, url):
     r = requests.get(url, params=payload)
     return r.json()
 
-def checkData(json):
+def check_Data(json):
     print("_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/")
     print("_/_/_/_/_/_/_/_/_/構造確認_/_/_/_/_/_/_/_/_/")
     print("_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/")
@@ -39,7 +39,7 @@ def checkData(json):
     print("_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/")
 
 
-def printJson(json):
+def print_Json(json):
     counter = 0
     for i in json['Items']:
         counter = counter + 1
@@ -57,7 +57,7 @@ def main():
     url = 'https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706'
 
     json = get_api(keyword, url)
-    printJson(json)
+    print_Json(json)
 
 
 
